@@ -24,7 +24,8 @@ object demo extends SbtModule { m =>
   )
   object test extends SbtModuleTests with TestModule.ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
-      ivy"org.scalatest::scalatest::3.2.16"
+      ivy"org.scalatest::scalatest::3.2.16",
+      ivy"edu.berkeley.cs::chiseltest:6.0.0"
     )
   }
 }

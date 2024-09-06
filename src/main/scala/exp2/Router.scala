@@ -10,7 +10,7 @@ class Router extends Module {
         val out      = Output(Vec(3, UInt(5.W)))
     })
 
-    io.out(0) := io.in(0)
-    io.out(1) := io.in(1)
-    io.out(2) := io.in(2)
+    io.out(0) := MuxLookup(io.ctrlInfo, io.in(1))(Seq(0.U -> io.in(0), 3.U -> io.in(2)))
+    io.out(1) := MuxLookup(io.ctrlInfo, io.in(2))(Seq(1.U -> io.in(0), 3.U -> io.in(1)))
+    io.out(2) := MuxLookup(io.ctrlInfo, io.in(0))(Seq(0.U -> io.in(1), 1.U -> io.in(2)))
 }
