@@ -32,4 +32,4 @@ class TestCounter4 extends AnyFreeSpec with ChiselScalatestTester {
 }
 
 // 测试命令：
-// mill MyChiselProject.test.testOnly exp7.todo.TestCounter4
+// mill demo.test.testOnly exp7.todo.TestCounter4

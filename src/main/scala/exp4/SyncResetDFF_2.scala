@@ -13,7 +13,7 @@ class SyncResetDFF_2 extends Module {
     q := qReg
 }
 
-// mill MyChiselProject.runMain exp4.SyncResetDFF_2
+// mill demo.runMain exp4.SyncResetDFF_2
 object SyncResetDFF_2 extends App {
     import _root_.circt.stage.{ChiselStage, FirtoolOption}
     import chisel3.stage.ChiselGeneratorAnnotation

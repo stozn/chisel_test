@@ -14,4 +14,4 @@ class ModifiedTriangleWave extends Module {
 }
 
 // 测试命令：
-// mill MyChiselProject.test.testOnly exp6.todo.TestModifiedTriangleWave
+// mill demo.test.testOnly exp6.todo.TestModifiedTriangleWave

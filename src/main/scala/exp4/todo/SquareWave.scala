@@ -14,4 +14,4 @@ class SquareWave extends Module {
 }
 
 // 测试命令：
-// mill MyChiselProject.test.testOnly exp4.todo.TestSquareWave
+// mill demo.test.testOnly exp4.todo.TestSquareWave
