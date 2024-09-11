@@ -9,25 +9,26 @@ class Decoder4to16 extends Module {
         val out = Output(UInt(16.W))
     })
 
-    io.out := 0.U
-    switch(io.in) {
-        is("h0".U) { io.out := "h1".U }
-        is("h1".U) { io.out := "h2".U }
-        is("h2".U) { io.out := "h4".U }
-        is("h3".U) { io.out := "h8".U }
-        is("h4".U) { io.out := "h10".U }
-        is("h5".U) { io.out := "h20".U }
-        is("h6".U) { io.out := "h40".U }
-        is("h7".U) { io.out := "h80".U }
-        is("h8".U) { io.out := "h100".U }
-        is("h9".U) { io.out := "h200".U }
-        is("ha".U) { io.out := "h400".U }
-        is("hb".U) { io.out := "h800".U }
-        is("hc".U) { io.out := "h1000".U }
-        is("hd".U) { io.out := "h2000".U }
-        is("he".U) { io.out := "h4000".U }
-        is("hf".U) { io.out := "h8000".U }
-    }
+    io.out := MuxLookup(io.in, 0.U)(
+        Seq(
+            0.U -> "h1".U,
+            1.U -> "h2".U,
+            2.U -> "h4".U,
+            3.U -> "h8".U,
+            4.U -> "h10".U,
+            5.U -> "h20".U,
+            6.U -> "h40".U,
+            7.U -> "h80".U,
+            8.U -> "h100".U,
+            9.U -> "h200".U,
+            10.U -> "h400".U,
+            11.U -> "h800".U,
+            12.U -> "h1000".U,
+            13.U -> "h2000".U,
+            14.U -> "h4000".U,
+            15.U -> "h8000".U
+        )
+    )
 }
 
 // 测试命令：

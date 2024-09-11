@@ -8,9 +8,21 @@ class SquareWave extends Module {
         val waveOut = Output(Bool())
     })
 
-    io.waveOut <> DontCare
+    val counter = RegInit(0.U(log2Ceil(100).W))
 
-    // TODO: fill your code...
+    val flag = RegInit(false.B)
+
+    counter := counter + 1.U
+
+    when(counter === 30.U || counter === 40.U) {
+        flag := ~flag
+    }
+
+    when(counter === (100 - 1).U) {
+        counter := 0.U
+    }
+
+    io.waveOut := flag
 }
 
 // 测试命令：
