@@ -16,15 +16,41 @@ class Fsm extends Module {
 
     // 状态寄存器
     val stateReg = RegInit(green)
+    io.ringBell := false.B
 
     // 状态转换逻辑
     switch(stateReg) {
-        is(green) {}
-        is(orange) {}
-        is(red) {}
-        is(black) {}
-    }
-
-    // 输出逻辑
-    io.ringBell := DontCare
+        is(green) {
+            when(io.worstEvent) {
+                stateReg := black
+            }.elsewhen(io.badEvent) {
+                stateReg := orange
+            }
+        }
+        is(orange) {
+            when(io.clear){
+                stateReg := green
+            }.elsewhen(io.worstEvent) {
+                stateReg := black
+            }.elsewhen(io.badEvent) {
+                stateReg := red
+            }
+        }
+        is(red) {
+            when(io.clear){
+                stateReg := orange
+            }.elsewhen(io.worstEvent || io.badEvent) {
+                stateReg := black
+            }
+        }
+        is(black) {
+            when(io.clear){
+                stateReg := red
+            }.elsewhen(io.worstEvent || io.badEvent) {
+                io.ringBell := true.B
+            }
+        }
+    } 
 }
+
+// mill demo.test.testOnly exp5.TestFsm
