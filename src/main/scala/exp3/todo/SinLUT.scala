@@ -6,7 +6,7 @@ import scala.math._
 
 class SinLUT extends Module {
     val io = IO(new Bundle {
-        val in  = Input(UInt(8.W))
+        val in  = Input(UInt(6.W))
         val out = Output(UInt(16.W))
     })
 
