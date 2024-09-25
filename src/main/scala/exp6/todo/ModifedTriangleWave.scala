@@ -8,9 +8,22 @@ class ModifiedTriangleWave extends Module {
         val waveOut = UInt(16.W)
     })
 
-    io.waveOut <> DontCare
+    val counter   = RegInit(0.U(16.W))
+    val direction = RegInit(true.B)
+    val waveReg   = RegInit(0.U(16.W))
 
-    // TODO: fill your code...
+    when(counter(4) ^ ~direction) {  // 7 -> 4
+        direction := ~direction
+    }
+    counter := counter + 1.U
+
+    when(direction) {
+        waveReg := waveReg + 2.U    // 1 -> 2
+    }.otherwise {
+        waveReg := waveReg - 2.U    // 1 -> 2
+    }
+
+    io.waveOut := waveReg
 }
 
 // 测试命令：
