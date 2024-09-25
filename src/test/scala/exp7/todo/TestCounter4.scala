@@ -24,8 +24,23 @@ class TestCounter4 extends AnyFreeSpec with ChiselScalatestTester {
        *       使用for循环step并打印15次, 例如 for(i <- 0 until 15),
        *       接下来再次step应该会观察到数值变为了 0 
        */
+            var clock = 1
+            for(i <- 0 until 20){
+                dut.clock.step(1)
+                clock = clock + 1
+                println(s"Count after ${clock} clock: ${dut.io.count.peek().litValue}")
+                dut.io.count.expect(((i+1)%16).U)
+            }
 
             // 你可以将 enable 赋值为 false.B 再试试看
+            println("\ndisabled:")
+            dut.io.enable.poke(false.B)
+            for(i <- 0 until 10){
+                dut.clock.step(1)
+                clock = clock + 1
+                println(s"Count after ${clock} clock: ${dut.io.count.peek().litValue}")
+                dut.io.count.expect(4.U)
+            }
 
         }
     }
